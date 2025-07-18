@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bot Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-slate-900 text-white">
+      <header class="p-4 bg-slate-800 shadow-md">
+        <nav class="max-w-7xl mx-auto flex items-center gap-8 font-semibold text-white">
+          <a href="/" class="hover:text-indigo-400 transition-colors duration-200">🏠 Home</a>
+        </nav>
+      </header>
+    </body>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #0f172a;
+        color: #f1f5f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        margin: 0;
+      }
+
+      .container {
+        background: #1e293b;
+        padding: 30px;
+        border-radius: 16px;
+        max-width: 640px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      img.logo {
+        width: 72px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+        font-size: 26px;
+        color: #38bdf8;
+      }
+
+      .url-display {
+        font-size: 17px;
+        background: #0f172a;
+        padding: 14px 24px;
+        border-radius: 12px;
+        margin: 20px 0;
+        word-break: break-word;
+        border: 1px solid #38bdf8;
+        user-select: all;
+        cursor: text;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .url-display.error {
+        border-color: #ef4444;
+        color: #fca5a5;
+      }
+
+      button.copy-btn {
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button.copy-btn:hover {
+        background-color: #2563eb;
+      }
+
+      button.copy-btn:disabled {
+        background-color: #6b7280;
+        cursor: not-allowed;
+      }
+
+      .footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #94a3b8;
+      }
+
+      #toast {
+        visibility: hidden;
+        min-width: 200px;
+        background-color: #22c55e;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 12px 20px;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 15px;
+        opacity: 0;
+        transition: opacity 0.3s, visibility 0.3s;
+      }
+
+      #toast.show {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      #toast.error {
+        background-color: #ef4444;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Logo" class="logo" />
+      <h1>🚀 Discord Bot Control Panel</h1>
+      <p class="url-display"><span id="urlDisplay"><%= url %>/auth/discord/callback</span></p>
+      <button class="copy-btn" onclick="copyURL()">📋 Copy URL</button>
+      <div class="footer">
+        Hosted at <strong>melo.wisp.uno:12599</strong> • Secure API
+      </div>
+    </div>
+
+    <div id="toast">✅ URL copied successfully!</div>
+
+    <script>
+      function copyURL() {
+        const element = document.getElementById('urlDisplay');
+        const copyBtn = document.querySelector('.copy-btn');
+        
+        if (!element) {
+          showToast('❌ No URL element found', true);
+          return;
+        }
+
+        let textToCopy = element.innerText.trim();
+        
+        // Check if URL is valid
+        if (!textToCopy || textToCopy === '/auth/discord' || textToCopy.includes('URL not found') || textToCopy.includes('Ngrok is not running')) {
+          showToast('❌ No valid URL available - check if Ngrok is running', true);
+          return;
+        }
+        
+        // Ensure URL has protocol if it doesn't already
+        if (!textToCopy.startsWith('http://') && !textToCopy.startsWith('https://')) {
+          textToCopy = 'https://' + textToCopy;
+        }
+
+        // Disable button temporarily
+        copyBtn.disabled = true;
+        copyBtn.textContent = '📋 Copying...';
+
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              showToast('✅ URL copied successfully!', false);
+            })
+            .catch(err => {
+              console.error('Clipboard API failed:', err);
+              fallbackCopy(textToCopy);
+            })
+            .finally(() => {
+              copyBtn.disabled = false;
+              copyBtn.textContent = '📋 Copy URL';
+            });
+        } else {
+          // Fallback for older browsers
+          fallbackCopy(textToCopy);
+          copyBtn.disabled = false;
+          copyBtn.textContent = '📋 Copy URL';
+        }
+      }
+
+      function fallbackCopy(text) {
+        // Create a temporary textarea element
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        textarea.style.left = '-9999px';
+        
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // For mobile devices
+        
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            showToast('✅ URL copied successfully!', false);
+          } else {
+            showToast('❌ Failed to copy URL', true);
+          }
+        } catch (err) {
+          console.error('Fallback copy failed:', err);
+          showToast('❌ Copy not supported in this browser', true);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+
+      function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        
+        if (isError) {
+          toast.classList.add('error');
+        } else {
+          toast.classList.remove('error');
+        }
+        
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      // Check URL status on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlDisplay = document.getElementById('urlDisplay');
+        const urlContainer = document.querySelector('.url-display');
+        const copyBtn = document.querySelector('.copy-btn');
+        
+        if (urlDisplay) {
+          const urlText = urlDisplay.innerText.trim();
+          
+          // Disable copy button if URL is invalid
+          if (!urlText || urlText.includes('URL not found') || urlText.includes('Ngrok is not running')) {
+            copyBtn.disabled = true;
+            copyBtn.textContent = '❌ Ngrok Offline';
+            copyBtn.style.backgroundColor = '#ef4444';
+            urlContainer.classList.add('error');
+          }
+        }
+        
+        if (!navigator.clipboard && !document.queryCommandSupported('copy')) {
+          console.warn('Clipboard functionality may not be available');
+        }
+      });
+    </script>
+  </body>
+</html>

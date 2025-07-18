@@ -1,0 +1,17 @@
+{
+  "languageName": "English",
+  "title": "📘 Gmail Verification Guide",
+  "description": "Here are the commands to help you link and verify your Gmail account with Discord:",
+  "footer": "💡 You can switch language using the buttons below.",
+  "commands": {
+    "link": "```🔗 — Link your Gmail account to your Discord profile.```",
+    "verify": "```📩 — Send a 6-digit verification code to your Gmail.```",
+    "auth": "```🔐 — Enter the verification code to complete the process.```",
+    "resend": "```🔁 — Resend the verification code if you didn’t receive it.```",
+    "reset": "```♻️ — Clear your current verification data.```",
+    "status": "```📋 — Check your current verification status.```",
+    "changemail": "```✉️ — Update your linked Gmail address.```",
+    "unlink": "```🗑️ — Unlink Gmail from the system.```",
+    "guide": "```📘 — Show the verification guide and command list.```"
+  }
+}

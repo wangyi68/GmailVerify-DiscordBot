@@ -1,0 +1,46 @@
+  </div>
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/942/942748.png" />
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen flex items-center justify-center">
+
+  <div class="bg-gray-800/80 border border-yellow-500 rounded-3xl shadow-2xl backdrop-blur-lg max-w-lg w-full p-10 text-center animate-fade-in">
+    <div class="flex justify-center mb-4">
+      <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" class="w-24 h-24 animate-bounce drop-shadow-lg" />
+    </div>
+    <h1 class="text-4xl font-extrabold text-yellow-400 mb-3 flex items-center justify-center gap-2">
+      <span>🚧</span> Under Maintenance
+    </h1>
+    <p class="text-gray-300 text-lg mb-2">Our API is currently undergoing improvements to serve you better.</p>
+    <p class="text-gray-400 text-base">Please check back shortly. Thank you for your patience! 💜</p>
+
+    <div class="mt-8">
+      <a href="/" class="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 transition-all px-6 py-2 rounded-xl font-bold shadow-md text-lg flex items-center gap-2 justify-center">
+        <span>🔙</span> Return to Home
+      </a>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-10 flex items-center justify-center gap-1">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="w-4 h-4" />
+      <span>2025 Discord Verification</span>
+    </p>
+  </div>
+
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out;
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "languageName": "Tiếng Việt",
+  "title": "📘 Hướng Dẫn Xác Minh Gmail",
+  "description": "Dưới đây là các lệnh hỗ trợ bạn liên kết và xác minh tài khoản Gmail với Discord:",
+  "footer": "💡 Bạn có thể thay đổi ngôn ngữ bằng các nút bên dưới.",
+  "commands": {
+    "link": "```🔗 — Liên kết tài khoản Gmail của bạn với Discord.```",
+    "verify": "```📩 — Gửi mã xác minh gồm 6 chữ số đến Gmail của bạn.```",
+    "auth": "```🔐 — Nhập mã xác minh để hoàn tất quá trình.```",
+    "resend": "```🔁 — Gửi lại mã xác minh nếu bạn chưa nhận được.```",
+    "reset": "```♻️ — Xóa toàn bộ dữ liệu xác minh hiện tại.```",
+    "status": "```📋 — Kiểm tra trạng thái xác minh hiện tại của bạn.```",
+    "changemail": "```✉️ — Cập nhật địa chỉ Gmail đã liên kết.```",
+    "unlink": "```🗑️ — Hủy liên kết Gmail khỏi hệ thống.```",
+    "guide": "```📘 — Hiển thị hướng dẫn và danh sách lệnh xác minh.```"
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation - Verify System</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+  </head>
+  <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white font-sans min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="w-full bg-gray-900/80 border-b border-gray-800 px-6 py-4 flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-2">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Logo" class="w-8 h-8 animate-spin-slow" />
+        <span class="text-xl font-bold tracking-wide text-indigo-400">Verify System</span>
+      </div>
+      <div class="hidden md:flex space-x-4 text-sm">
+        <a href="/" class="hover:text-indigo-400 transition font-semibold">Home</a>
+        <a href="/docs" class="text-indigo-400 underline font-bold">Docs</a>
+        <a href="/auth/discord" class="hover:text-indigo-400 transition font-semibold">Login</a>
+        <a href="/url" class="hover:text-indigo-400 transition-colors duration-200">URL Shortener</a>
+      </div>
+      <div class="md:hidden relative" x-data="{ open: false }">
+        <button @click="open = !open" class="text-white">
+          <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-0 right-0" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div x-show="open" class="absolute right-0 mt-2 bg-gray-800 border border-gray-700 rounded-md shadow-lg text-sm py-2 px-4 space-y-1 z-50">
+          <a href="/" class="block hover:text-indigo-400">Home</a>
+          <a href="/docs" class="block text-indigo-400 font-bold">Docs</a>
+          <a href="/auth/discord" class="block hover:text-indigo-400">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex flex-col md:flex-row flex-grow px-4 py-10 max-w-7xl mx-auto w-full gap-8">
+
+      <!-- Sidebar Table of Contents -->
+      <aside class="hidden md:block w-64 border-r border-gray-700 pr-6 sticky top-24 self-start">
+        <h2 class="text-indigo-300 text-lg font-bold mb-4 flex items-center gap-2">📚 On This Page</h2>
+        <nav class="space-y-2 text-base text-gray-400">
+          <a href="#link" class="hover:text-indigo-400 block font-semibold">🔗 Link Email</a>
+          <a href="#verify" class="hover:text-indigo-400 block font-semibold">✉️ Request Code</a>
+          <a href="#auth" class="hover:text-indigo-400 block font-semibold">🔑 Confirm Code</a>
+          <a href="#resend" class="hover:text-indigo-400 block font-semibold">🔁 Resend or Change</a>
+          <a href="#admin" class="hover:text-indigo-400 block font-semibold">⚙️ Admin Commands</a>
+        </nav>
+      </aside>
+
+      <!-- Docs Section -->
+      <section class="flex-grow bg-gray-800/90 border border-gray-700 rounded-3xl shadow-2xl p-10 backdrop-blur-md">
+        <h1 class="text-4xl font-extrabold mb-8 text-indigo-300 flex items-center gap-2">📖 Documentation</h1>
+
+        <div class="space-y-12">
+          <section id="link">
+            <h2 class="text-2xl font-bold text-indigo-200 mb-2 flex items-center gap-2">🔗 Step 1: Link Email</h2>
+            <p class="text-gray-300 text-base mb-2">
+              Use the <code class="bg-gray-700 px-2 py-1 rounded text-base font-mono">/link</code> command to receive a link that connects your Discord account with your Gmail.
+            </p>
+          </section>
+
+          <section id="verify">
+            <h2 class="text-2xl font-bold text-indigo-200 mb-2 flex items-center gap-2">✉️ Step 2: Request Code</h2>
+            <p class="text-gray-300 text-base mb-2">
+              After linking your email, use <code class="bg-gray-700 px-2 py-1 rounded text-base font-mono">/verify</code> to receive a 6-digit code via Gmail.
+            </p>
+          </section>
+
+          <section id="auth">
+            <h2 class="text-2xl font-bold text-indigo-200 mb-2 flex items-center gap-2">� Step 3: Confirm Code</h2>
+            <p class="text-gray-300 text-base mb-2">
+              Use <code class="bg-gray-700 px-2 py-1 rounded text-base font-mono">/auth &lt;code&gt;</code> to verify your account.
+            </p>
+          </section>
+
+          <section id="resend">
+            <h2 class="text-2xl font-bold text-indigo-200 mb-2 flex items-center gap-2">🔁 Step 4: Resend or Change</h2>
+            <p class="text-gray-300 text-base mb-2">
+              Didn’t receive the code? Use <code class="bg-gray-700 px-2 py-1 rounded text-base font-mono">/resend</code> or change email with <code class="bg-gray-700 px-2 py-1 rounded text-base font-mono">/link</code>.
+            </p>
+          </section>
+
+          <section id="admin">
+            <h2 class="text-2xl font-bold text-indigo-200 mb-2 flex items-center gap-2">⚙️ Admin Commands</h2>
+            <ul class="list-disc list-inside text-gray-300 text-base space-y-1 ml-4">
+              <li><code class="bg-gray-700 px-2 py-1 rounded font-mono">/cleardata</code> — Delete all stored emails & codes (Owner only)</li>
+              <li><code class="bg-gray-700 px-2 py-1 rounded font-mono">/export</code> — Export verified emails to CSV</li>
+              <li><code class="bg-gray-700 px-2 py-1 rounded font-mono">/filter</code> — Filter users by email or status</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-xs text-gray-500 py-6 border-t border-gray-700 flex items-center justify-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="w-4 h-4" />
+      <span>2025 Verify System by Discord Bot Team</span>
+    </footer>
+  <style>
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 6s linear infinite;
+    }
+  </style>
+  </body>
+</html>
